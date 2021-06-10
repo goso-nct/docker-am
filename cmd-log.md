@@ -1,3 +1,8 @@
+#ver 1  
+```
+print("Hello, World !")
+```
+
 Создаём имадж для приложения:  
 (venv) vg@ubu20box:~/PycharmProjects/docker$ **docker build -t hello-world .**  
 ```
@@ -35,6 +40,8 @@ hello-world   latest    4752cbc47225   18 minutes ago   896MB
 python        3.8       e7d3be492e61   2 weeks ago      883MB
 hello-world   <none>    d1165f221234   3 months ago     13.3kB
 ```
+(нижний hello это тест докера)  
+
 Запускаем:  
 (venv) vg@ubu20box:~/PycharmProjects/docker$ **docker run hello-world:latest**
 ```
@@ -62,8 +69,51 @@ de69aaf2bd26
 0325ec4e10ec
 27ff7f73a89b
 ```
-Пусто:  
-(venv) vg@ubu20box:~/PycharmProjects/docker$ **docker ps -a**
+
+#ver 2  
 ```
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+while True:  
+  print("Hello, World !")  
+  time.sleep(1)  
 ```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker build -t hello-world .**  
+```
+Sending build context to Docker daemon  13.91MB  
+Step 1/5 : FROM python:3.8  
+ ---> e7d3be492e61  
+Step 2/5 : RUN mkdir -p /usr/src/app/  
+ ---> **Using cache**  
+ ---> 5ebcd8ee4002  
+...  
+Successfully tagged hello-world:latest
+```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --name hello -d hello-world**
+```
+ebc017befa6441609400d3458a10058a13147581d02db6561d07b9ea28c357de
+```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker ps**
+```
+CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS         PORTS     NAMES
+ebc017befa64   hello-world   "python app.py"   11 seconds ago   Up 9 seconds             hello
+```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker stop hello**  
+```
+hello
+```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker ps -a**
+```
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS                        PORTS     NAMES
+ebc017befa64   hello-world   "python app.py"   4 minutes ago   Exited (137) 30 seconds ago             hello
+```
+_Status 137_ т.к. погасили стопом  
+
+Для автоматического удаления контейнера после его отработки:  
+docker run --name hello -d **-rm** hello-world
+
+
+
