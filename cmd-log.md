@@ -70,7 +70,7 @@ de69aaf2bd26
 27ff7f73a89b
 ```
 
-#ver 2  
+#ver 2 cycle  
 ```
 while True:  
   print("Hello, World !")  
@@ -113,7 +113,40 @@ ebc017befa64   hello-world   "python app.py"   4 minutes ago   Exited (137) 30 s
 _Status 137_ т.к. погасили стопом  
 
 Для автоматического удаления контейнера после его отработки:  
-docker run --name hello -d **-rm** hello-world
+docker run --name hello -d **--rm** hello-world
+
+#ver 3  web  
+```
+web-app on flask  
+
+pip install -r requirements.txt  
+```
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker build -t web-hello .**
+Sending build context to Docker daemon  13.92MB  
+Step 1/7 : FROM python:3.8  
+ ---> e7d3be492e61  
+...
+WARNING: Running pip as root will break packages and permissions. You should install packages reliably by using venv: https://pip.pypa.io/warnings/venv  
+...  
+Successfully built b3c66a6fe903  
+Successfully tagged web-hello:latest  
+
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --name web -p 8080:8080 --rm web-hello**
+  Serving Flask app 'app' (lazy loading)  
+  Environment: production  
+  ...  
+  Running on http://172.17.0.2:8080/ (Press CTRL+C to quit)  
+  ...  
+  Hello, World! Now: - 10.06.2021 **19**:36:44 д.б. 22  
+
+git status
+
+
+
+
+
+
 
 
 
