@@ -18,5 +18,4 @@ ENV TZ=Europe/Moscow
 $ docker run --rm --name web **-p 8080:8080** web-hello  
 $ docker run --rm --name web -p 8080:8080 **-e TZ=Europe/Moscow** web-hello  
 
-
-
+Add CI/CD on GitLab (test pipline starting by commit)

@@ -173,6 +173,14 @@ vg@ubu20box:~/PycharmProjects/docker-am$ **docker volume inspect my_volume**
     }
 ]
 ```
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --rm --name web -p 8080:8080 -e TZ=Europe/Moscow -v my_volume:/usr/src/app/resources web-hello**  
+vg@ubu20box:~$ cd /var/lib/docker/volumes/my_volume/_data  
+vg@ubu20box:/var/lib/docker/volumes/my_volume/_data$ ls  
+response.json  
+vg@ubu20box:/var/lib/docker/volumes/my_volume/_data$ sudo vi response.json  
+_Hello, from VOLUME! Now: - 11.06.2021 14:40:34_  
+
+
 
 
 
