@@ -173,12 +173,40 @@ vg@ubu20box:~/PycharmProjects/docker-am$ **docker volume inspect my_volume**
     }
 ]
 ```
-vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --rm --name web -p 8080:8080 -e TZ=Europe/Moscow -v my_volume:/usr/src/app/resources web-hello**  
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --rm --name web -p 8080:8080 -v my_volume:/usr/src/app/resources web-hello**  
 vg@ubu20box:~$ cd /var/lib/docker/volumes/my_volume/_data  
 vg@ubu20box:/var/lib/docker/volumes/my_volume/_data$ ls  
 response.json  
 vg@ubu20box:/var/lib/docker/volumes/my_volume/_data$ sudo vi response.json  
-_Hello, from VOLUME! Now: - 11.06.2021 14:40:34_  
+_Hello, **from VOLUME**! Now: - 11.06.2021 14:40:34_  
+
+# mongo
+
+В хабе есть монго, запускаем:  
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker run --rm -d -p 27017:27017 mongo**  
+8f4995a206632770550e0501614c89d928d45391bc3a4ef1b2cca8dc1a10266a  
+Скачалась, работает:  
+vg@ubu20box:~/PycharmProjects/docker-am$ **docker ps**  
+```
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS         PORTS                                           NAMES  
+8f4995a20663   mongo     "docker-entrypoint.s…"   14 seconds ago   Up 9 seconds   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   confident_spence
+```
+
+Запускаем приложение:
+/usr/bin/python3.8 **/home/vg/PycharmProjects/docker-am/app-mongo.py**
+```
+{'_id': '1327e089-6156-4bb6-b703-1db440817def', 'payload': '7ac3eaed-45c3-4493-a177-dbb154decce9', 'field2': '1623516843'}
+{'_id': 'd1da287f-2ccf-4030-8465-e752437b5e36', 'payload': '1f20bd49-e0a8-4dae-b306-ceb5814eab0e', 'field2': '1623516843'}
+{'_id': 'aa45185d-0749-48b6-90c9-9da14200a518', 'payload': '9ec7f1eb-80d9-44cc-8b31-0c4e39ab47d3', 'field2': '1623516843'}
+{'_id': '2614dab9-780c-4752-8794-546b95ebeaf2', 'payload': '12d6db19-b81c-4958-9fb6-9da6cb1c4a93', 'field2': '1623516843'}
+{'_id': '4f4e7dd4-fa6a-41ba-8314-5bea349484d0', 'payload': '6a0f2319-77d5-4b31-a0f8-84d30b97842a', 'field2': '1623516843'}
+
+Process finished with exit code 0
+```
+
+Удобно - имеем БД для отладки - не инстолии, не настраивали, получили из коробки (из образа)  
+
+
 
 
 
